@@ -17,6 +17,7 @@ function HomePage() {
   const [errorAuth, setErrorAuth] = useState(false);
   const [messageSucces, setMessageSucces] = useState(false);
   const [messageError, setMessageError] = useState(false);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
@@ -120,6 +121,7 @@ function HomePage() {
         setMessageSucces(false);
         toast.error("Error during registration.");
       }
+      setIsButtonClicked(true);
     } catch (error) {
       // Log de l'erreur pour le débogage
   
@@ -262,7 +264,8 @@ function HomePage() {
 
           <button
             className="w-64 bg-green-500 text-white py-2 rounded hover:bg-green-600"
-            onClick={handleRegister}
+            onClick={() => handleRegister()}
+            disabled={isButtonClicked} 
           >
             Sign Up
           </button>
