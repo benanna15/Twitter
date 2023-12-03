@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b4576c63.css",
+    "main.js": "/static/js/main.e27d7af5.js",
+    "static/js/787.82585616.chunk.js": "/static/js/787.82585616.chunk.js",
+    "static/media/bird-image.png": "/static/media/bird-image.bea1d92e1761e0d9d33a.png",
+    "static/media/istockphoto-1300845620-612x612.jpg": "/static/media/istockphoto-1300845620-612x612.2e5b578978ce5ae1c749.jpg",
+    "index.html": "/index.html",
+    "main.b4576c63.css.map": "/static/css/main.b4576c63.css.map",
+    "main.e27d7af5.js.map": "/static/js/main.e27d7af5.js.map",
+    "787.82585616.chunk.js.map": "/static/js/787.82585616.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b4576c63.css",
+    "static/js/main.e27d7af5.js"
+  ]
+}
