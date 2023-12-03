@@ -262,7 +262,7 @@ function HomePage() {
 
           <button
             className="w-64 bg-green-500 text-white py-2 rounded hover:bg-green-600"
-            onClick={() => handleRegister()}
+            onClick={handleRegister}
           >
             Sign Up
           </button>
