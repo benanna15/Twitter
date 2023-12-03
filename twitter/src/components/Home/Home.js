@@ -345,6 +345,7 @@ const deleteCommentClick = () => {
 )}
 {showLargeImage && (
   <ImageModal
+  className='max-w-screen-md max-h-screen-md mx-auto'
     src={largeImageSrc}
     onClose={() => setShowLargeImage(false)}
   />

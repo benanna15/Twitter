@@ -52,6 +52,7 @@ const RandomUsers = () => {
       </div>
       {showLargeImage && (
   <ImageModal
+ 
     src={largeImageSrc}
     onClose={() => setShowLargeImage(false)}
   />
