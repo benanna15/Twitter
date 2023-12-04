@@ -65,7 +65,7 @@ const Dashboard = () => {
   </div>
         <div>
           <h3 className="text-xl font-semibold mb-2 mt-9">Discover Users</h3>
-          <RandomUsers/>
+          <RandomUsers user={user}/>
         </div>
       </div>
     </div>

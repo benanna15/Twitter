@@ -44,9 +44,7 @@ const LikeComment = (props) => {
             tweetedId :tweetedId 
           },
         })
-        .then(function(response){
-          console.log(response);
-        });
+      
         dispatch(
           updateLikeComment({
             comment_id: comment.id,
@@ -69,10 +67,8 @@ const LikeComment = (props) => {
             tweetedId :tweetedId 
           },
         })
-        .then(function(response){
-          console.log(response);
-        });
-     
+       
+      updateTotalLikes( comment.id  , updatedLikeCount, newLikeValue);
         dispatch(
           addLikeComment({
             user_id: id,
@@ -82,8 +78,8 @@ const LikeComment = (props) => {
             tweetedId :tweetedId 
           })
         );
-        setLikeCount(updatedLikeCount);
-        updateTotalLikes( comment.id  , updatedLikeCount, newLikeValue);
+       // setLikeCount(updatedLikeCount);
+       
         setFindLike(true);
         setRedHeart(newLikeValue);
       }

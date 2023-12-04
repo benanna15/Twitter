@@ -18,6 +18,7 @@ import { getPseudo, getImage } from '../../redux/slices/auth.slice';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import { setLikesComment } from "../../redux/slices/likesComment.slice";
 import { updateTotalCommentPerTweet } from '../../redux/slices/tweets.slice';
+
 import ImageModal from '../ImageModal/ImageModal';
 
 
@@ -71,6 +72,7 @@ const Comment = (props) => {
             "AD_PageNbr": "1",
             "AD_PageSize": "500"
           },
+          
         }),
       ]);
   
@@ -82,6 +84,8 @@ const Comment = (props) => {
       dispatch(setComments(filteredComments));
      
       dispatch(setLikesComment(likesData));
+
+
     } catch (error) {
       console.error('Une erreur s\'est produite :', error);
     }
@@ -246,9 +250,7 @@ const cancelDelete = () => {
         console.error('Erreur lors de la mise à jour du nombre total de likes :', error);
       });
   };
-useEffect(() => {
-  
-}, []);
+
   return (
     <div className="w-full overflow-scroll " >
       <ToastContainer position="top-right" className="" autoClose={3000} />

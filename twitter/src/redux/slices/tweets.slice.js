@@ -55,7 +55,7 @@ const tweetsSlice = createSlice({
       const updatedTweets = state.tweets.map((tweet) =>
         tweet.id === tweetId ? { ...tweet, like: likeChange, redHeart:redHeart} : tweet
       );
-    
+   
      
       // Retournez une nouvelle copie de l'état
       return {

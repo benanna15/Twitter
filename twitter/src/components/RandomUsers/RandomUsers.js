@@ -3,21 +3,24 @@ import axios from 'axios';
 import ImageModal from '../ImageModal/ImageModal';
 
 
-const RandomUsers = () => {
+const RandomUsers = ({user}) => {
+  const { id } = user;
   const [users, setUsers] = useState([]);
   const [showLargeImage, setShowLargeImage] = useState(false);
   const [largeImageSrc, setLargeImageSrc] = useState('');
-  useEffect(() => {
- 
+
+    useEffect(() => {
     axios.get('https://promises-cb263f.appdrag.site/api/getAllUsers', {
       params: {
         "AD_PageNbr": "1",
         "AD_PageSize": "500"
       }
     }).then(function (response) {
-        const shuffledUsers = response.data.Table.sort(() => Math.random() - 0.5);
-        const selectedUsers = shuffledUsers.slice(0, 5);
-        setUsers(selectedUsers);
+      const shuffledUsers = response.data.Table.sort(() => Math.random() - 0.5);
+   
+      const filteredUsers = shuffledUsers.filter(user => user.id !== id);
+      const selectedUsers = filteredUsers.slice(0, 5);
+      setUsers(selectedUsers);
     }).catch(function (error) {
       console.error('Une erreur s\'est produite lors de la récupération des utilisateurs :', error);
     });

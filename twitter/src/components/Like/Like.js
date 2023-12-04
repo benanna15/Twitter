@@ -5,26 +5,36 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateTotalLikesPerTweet } from '../../redux/slices/tweets.slice';
 import { setLikes, addLike, updateLike } from '../../redux/slices/likes.slice';
+import Comment from '../Comment/Comment';
 
 const Like = (props) => {
-  const { tweet, id ,likes } = props;
+  const { tweet, id ,likes , isCommentDialogClose } = props;
   const dispatch = useDispatch();
+  console.log("ds le like");
   //const likes = useSelector((state) => state.likes.likes);
   const [redHeart, setRedHeart] = useState(tweet.redHeart || false);
   const [findLike, setFindLike] = useState(false);
   const [likeCount, setLikeCount] = useState(tweet.like);
 
   useEffect(() => {
+    //console.log("ds le useEffect");
     if (likes) {
       const findTweetValue = likes.find(
-        (tweets) => tweets.user_id === id && tweets.tweet_id === tweet.id
+       (tweets) => tweets.user_id === id && tweets.tweet_id === tweet.id
+
+
       );
 
-      setFindLike(!!findTweetValue); // Convertir en booléen
+      setFindLike(!!findTweetValue); 
       setRedHeart(findTweetValue?.liked == 1)
+     
+      if (isCommentDialogClose) {
+        setLikeCount((prevLikeCount) => (findTweetValue?.liked === 1 ? prevLikeCount + 1 : prevLikeCount - 1));
+   }
+      
     
     }
-  }, [tweet.id,id]);
+  }, [dispatch,id,tweet.id,isCommentDialogClose]);
 
   const handleLikeClick = async () => {
     const newLikeValue = redHeart ? 0 : 1;

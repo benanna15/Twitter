@@ -12,7 +12,7 @@ export function CommentDialog({  id, isOpen, onClose, tweetedId}) {
   return  (
     
       
-    <Dialog open={isOpen}  // Utilisez onClose comme gestionnaire pour le clic à l'extérieur
+    <Dialog open={isOpen}  
     
     animate={{
       mount: { scale: 1, y: 0 , opacity: 1},

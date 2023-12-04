@@ -15,7 +15,7 @@ import { setTweets , addTweet, updateTweet, deleteTheTweet } from '../../redux/s
 import { setLikes  } from '../../redux/slices/likes.slice';
 import ImageModal from '../ImageModal/ImageModal';
 import { Textarea } from "@material-tailwind/react";
-
+import { updateTotalLikesPerTweet } from '../../redux/slices/tweets.slice';
 
 const Home = ({ user, filteredTweets  }) => {
   const { id, pseudo, image } = user;
@@ -27,7 +27,8 @@ const Home = ({ user, filteredTweets  }) => {
    
   const [showLargeImage, setShowLargeImage] = useState(false);
   const [largeImageSrc, setLargeImageSrc] = useState('');
-  
+  const [isCommentDialogOpen, setIsCommentDialogOpen] = useState(false);
+
 
   const [tweetCount, setTweetCount] = useState(0);
   const [myTweet, setMyTweet] = useState(false);
@@ -192,17 +193,22 @@ const deleteCommentClick = () => {
         const likesData = likesResponse.data.Table;
   
         tweetsData.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const findTweetValue = likesData.find(
+          (tweets) => tweets.user_id === id && tweets.tweet_id === tweetsData.id
+         );
+   
         dispatch(setTweets(tweetsData));
         dispatch(setLikes(likesData));
       } catch (error) {
         console.error('Une erreur s\'est produite :', error);
       }
     };
-  
+   
     fetchData();
+  
+
   }, [dispatch,commentClick]);
-  
-  
+ 
 
 
   
@@ -216,13 +222,14 @@ const deleteCommentClick = () => {
         </div>
 
         <div className="mb-4 flex flex-col">
-          <Textarea
+          <textarea
             placeholder="What's happening?"
-            className={`w-full border rounded p-2 mb-2 ${error ? 'border-red-500' : ''}`}
+            className={`w-full border  rounded p-2 mb-2 ${error ? 'border-red-500' : ''}focus:outline-none focus:border-cyan-500 focus:ring-cyan-500`}
             rows="5"
             value={tweetContentAdd || ""}
             onChange={(e) => setTweetContentAdd(e.target.value)}
           />
+          
           <button type="submit" onClick={() => handleSubmit()} className="bg-blue-500 text-white px-4 py-2 rounded self-end">
             Tweet
           </button>
@@ -314,13 +321,14 @@ const deleteCommentClick = () => {
                <div className="flex flex-row justify-between mt-4 ml-16">
               
                
-                   <Like id={id} tweet={tweet} likes={likes}/> 
+                   <Like id={id} tweet={tweet} likes={likes} isCommentDialogClose={isCommentDialogOpen}/> 
 <div  onClick={() => handleCommentClick(tweet.id)} >
                 
                   <button className="p-2 flex items-center" >
         <FontAwesomeIcon icon={faComment} className="text-blue-500 mr-2" />{tweet.comment && tweet.comment > 0 && <span>{tweet.comment}</span>}
     </button>
     </div>   
+    
               </div> 
               
             </div>
@@ -336,10 +344,12 @@ const deleteCommentClick = () => {
   <CommentDialog
     id={id}
     isOpen={commentClick}
+   
     tweetedId={commentedTweetId}
     onClose={() => {
       setCommentClick(false);
       deleteCommentClick();
+      setIsCommentDialogOpen(true)
     }}
   />
 )}
